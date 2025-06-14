@@ -1,0 +1,15 @@
+.header {
+    padding: 24px;
+    background-color: var(--color-gray-400);
+    display: flex;
+    justify-content: flex-end;
+}
+
+.header nav {
+    display: flex;
+    gap: 16px;
+  
+}
+.header nav a {
+    color: var(--color-secondary);
+}
