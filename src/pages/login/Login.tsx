@@ -11,12 +11,10 @@ export const Login=()=>{
     const navigate = useNavigate()
 
     const fazerLogin = async (e:React.FormEvent<HTMLFormElement>) => {
-        
         e.preventDefault()
         const body = {
             password:pass,
             email:email,
-
         }
        const res = await apiController.post("/login",body)
        console.log(res,"res do axios")
