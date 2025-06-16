@@ -2,6 +2,7 @@ import { useEffect } from "react"
 import { Header } from "../../components/header/Header"
 import { useNavigate } from "react-router-dom"
 import { apiController } from "../../controller/api.controller"
+import { Iconify } from "../../components/header/iconify/Iconify"
 
 export const Home=()=>{
     const navigate = useNavigate()
@@ -34,6 +35,7 @@ export const Home=()=>{
     },[])
     return <>
     <Header/>
+    
     <main>
 
         <p>Home</p>

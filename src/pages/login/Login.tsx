@@ -4,6 +4,7 @@ import style from "./style.module.css"
 import { apiController } from "../../controller/api.controller"
 import {toast} from "react-toastify"
 import { useNavigate } from "react-router-dom"
+import { Iconify } from "../../components/header/iconify/Iconify"
 
 export const Login=()=>{
     const [email,setEmail] = useState("")
@@ -30,6 +31,7 @@ export const Login=()=>{
     }
     return <>
     <Header/>
+    <Iconify icon="arcticons:avatar-world"/>
     <main className={style.main}>
         <form className={style.form} onSubmit={(event)=>fazerLogin(event)}>
             <fieldset>
