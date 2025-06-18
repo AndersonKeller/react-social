@@ -1,0 +1,11 @@
+.main {
+    display: flex;
+    justify-content: space-between;
+    padding: 24px;
+    gap: 24px;
+
+}
+.profile {
+    width: 60%;
+    background-color: var(--color-gray-50);
+}

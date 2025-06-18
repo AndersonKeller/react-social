@@ -4,7 +4,7 @@ import style from "./style.module.css"
 import { apiController } from "../../controller/api.controller"
 import {toast} from "react-toastify"
 import { useNavigate } from "react-router-dom"
-import { Iconify } from "../../components/header/iconify/Iconify"
+import { Iconify } from "../../components/iconify/Iconify"
 
 export const Login=()=>{
     const [email,setEmail] = useState("")
