@@ -13,3 +13,15 @@
 .header nav a {
     color: var(--color-secondary);
 }
+.fieldset {
+    position: relative;
+    border: none;
+}
+.fieldset input {
+        padding-left: 36px;
+}
+.icon {
+    position: absolute;
+    left: 8px;
+    top: 12px;
+}

@@ -4,6 +4,7 @@ import { useNavigate } from "react-router-dom"
 import { apiController } from "../../controller/api.controller"
 import { Feed } from "../../components/feed/Feed"
 import style from "../style.module.css"
+import { Iconify } from "../../components/iconify/Iconify"
 export const Home=()=>{
     const navigate = useNavigate()
 
@@ -37,6 +38,7 @@ export const Home=()=>{
     <Header/>
     
     <main className={style.main}>
+        <Iconify icon="mi:email" color="red" />
         <section className={style.profile}>
             <p>Meu perfil</p>
         </section>
