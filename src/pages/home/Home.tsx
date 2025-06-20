@@ -34,6 +34,7 @@ export const Home=()=>{
             validateUser(token)
         }
     },[])
+    
     return <>
     <Header/>
     

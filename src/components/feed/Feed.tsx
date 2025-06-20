@@ -2,6 +2,7 @@ import { useEffect, useState } from "react"
 import style from "./style.module.css"
 import { apiController } from "../../controller/api.controller"
 import { useNavigate } from "react-router-dom"
+import type { iPosts, Post } from "../../schemas/posts.schemas"
 
 interface FeedProps {
     idUsuario?: string
@@ -9,9 +10,9 @@ interface FeedProps {
 
 export const Feed=({idUsuario}:FeedProps)=>{
     const navigate = useNavigate()
-    const [posts,setPosts] = useState([])
+    const [posts,setPosts] = useState([] as iPosts)
     const [loading,setLoading] = useState(true)
-    const goToPerfil = (post) => {
+    const goToPerfil = (post:Post) => {
         console.log(post,"post")
         navigate(`/usuario/${post.usuario.id}`)
     }
@@ -19,10 +20,11 @@ export const Feed=({idUsuario}:FeedProps)=>{
         setLoading(true)
         const res = await apiController.get("/posts")
         console.log(res.data,"res")
-        if(res.data){
+        const posts:iPosts = res.data
+        if(posts){
             setTimeout(() => {
                 if(idUsuario){
-                    const filterPosts = res.data.filter((post)=>String(post.usuario.id) != idUsuario)
+                    const filterPosts =posts.filter((post)=>String(post.usuario.id) != idUsuario)
                     setPosts(filterPosts)
                 }else{
 
