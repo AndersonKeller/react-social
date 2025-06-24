@@ -1,3 +1,12 @@
+.fieldset {
+    position: relative;
+}
+.icon {
+    position: absolute;
+    right: 12px;
+    bottom: 34px;
+    cursor: pointer;
+}
 .error {
     color: #9c1d1d;
     font-size: 12px;
