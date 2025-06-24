@@ -4,21 +4,31 @@ import style from "./style.module.css"
 import { apiController } from "../../controller/api.controller"
 import {toast} from "react-toastify"
 import { useNavigate } from "react-router-dom"
-import { Iconify } from "../../components/iconify/Iconify"
+import { useForm } from "react-hook-form"
+import { createLoginSchema, type iCreateLogin } from "../../schemas/login.schemas"
+import { zodResolver } from "@hookform/resolvers/zod"
+import { Input } from "../../components/input/Input"
+
 
 export const Login=()=>{
-    const [email,setEmail] = useState("")
-    const [pass,setPass] = useState("")
     const navigate = useNavigate()
-
-    const fazerLogin = async (e:React.FormEvent<HTMLFormElement>) => {
-        e.preventDefault()
-        const body = {
-            password:pass,
-            email:email,
+    const {
+        register,
+        handleSubmit,
+        formState:{
+            errors
         }
-       const res = await apiController.post("/login",body)
-       console.log(res,"res do axios")
+    } = useForm<iCreateLogin>({
+        mode:"onBlur",
+        resolver: zodResolver(createLoginSchema)
+    })
+
+    const fazerLogin = async (loginData:iCreateLogin) => {
+        console.log(loginData,"loginData")
+       
+      try {
+         const res = await apiController.post("/login",loginData)
+            console.log(res,"res do axios")
        if(res.data.token){
             toast.success("Sucesso, login")
             localStorage.setItem("token",res.data.token)
@@ -26,27 +36,23 @@ export const Login=()=>{
                 navigate("/")
             }, 3000);
        }
-        console.log("fazer login", email)
-        console.log("fazer login",pass)
+      } catch (error:any) {
+        console.log(error,"error")
+        toast.error(error.response.data.message)
+      }
+        
     }
     return <>
     <Header/>
-    <Iconify icon="arcticons:avatar-world"/>
+    
     <main className={style.main}>
-        <form className={style.form} onSubmit={(event)=>fazerLogin(event)}>
-            <fieldset>
-                <label htmlFor="email">E-mail</label>
-                <input  id="email" type="text" placeholder="escreva seu e-mail"
-                 onChange={(e)=>setEmail(e.target.value)}
-                />
-            </fieldset>
-            <fieldset>
-                <label htmlFor="password">Senha</label>
-                <input id="password" type="password" placeholder="*****"
-                 onChange={(e)=>setPass(e.target.value)}
-                />
-
-            </fieldset>
+        <form className={style.form} onSubmit={handleSubmit(fazerLogin)}>
+            <Input errorMsg={errors.email&&errors.email.message} 
+            label="E-mail" type="text" placeholder="escreva seu e-mail" register={register("email")}/>
+           
+            <Input errorMsg={errors.password&&errors.password.message} 
+                label="Senha" type="password" placeholder="****" register={register("password")}
+            />
             <button type="submit">Login</button>
         </form>
     </main>

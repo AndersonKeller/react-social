@@ -3,12 +3,12 @@
     background-color: var(--color-gray-400);
     display: flex;
     justify-content: flex-end;
+    flex-direction: column;
+    gap: 32px;
 }
-
 .header nav {
     display: flex;
     gap: 16px;
-  
 }
 .header nav a {
     color: var(--color-secondary);
@@ -24,4 +24,10 @@
     position: absolute;
     left: 8px;
     top: 12px;
+}
+@media (min-width:412px){
+    .header {
+        flex-direction: row; 
+        gap: 12px;
+    }
 }

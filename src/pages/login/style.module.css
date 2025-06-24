@@ -6,6 +6,7 @@
     display: flex;
     align-items: center;
     justify-content: center;
+    margin: 0 auto;
 }
 
 .form {
@@ -24,4 +25,10 @@
     flex-direction: column;
     border: none;
     gap: 8px;
+}
+.error {
+    color: #9c1d1d;
+    font-size: 12px;
+    font-weight: 600;
+    height: 16px;
 }
