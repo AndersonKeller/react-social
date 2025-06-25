@@ -22,7 +22,7 @@ export const Input = ({label,type,placeholder,errorMsg,register}:InputProps)=>{
         {
             type === "password"?
             <>
-            <input type={newType} />
+            <input type={newType} {...register} placeholder={placeholder} id={label}/>
             <Iconify onClick={changeType} className={style.icon} icon="ri:eye-line"/>
             </>
         :
