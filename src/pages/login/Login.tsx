@@ -1,4 +1,4 @@
-import { useState } from "react"
+
 import { Header } from "../../components/header/Header"
 import style from "./style.module.css"
 import { apiController } from "../../controller/api.controller"
@@ -8,10 +8,14 @@ import { useForm } from "react-hook-form"
 import { createLoginSchema, type iCreateLogin } from "../../schemas/login.schemas"
 import { zodResolver } from "@hookform/resolvers/zod"
 import { Input } from "../../components/input/Input"
+import { useContext } from "react"
+import { MainContext } from "../../context/MainContext"
 
 
 export const Login=()=>{
     const navigate = useNavigate()
+    const { setUser } = useContext(MainContext)
+    
     const {
         register,
         handleSubmit,
@@ -32,6 +36,7 @@ export const Login=()=>{
        if(res.data.token){
             toast.success("Sucesso, login")
             localStorage.setItem("token",res.data.token)
+            setUser(res.data)
             setTimeout(() => {
                 navigate("/")
             }, 3000);

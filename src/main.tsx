@@ -4,6 +4,7 @@ import { BrowserRouter } from "react-router-dom";
   import { ToastContainer } from 'react-toastify';
 import './index.css'
 import App from './App.tsx'
+import { MainContext, MainContextProvider } from './context/MainContext.tsx';
 
 createRoot(document.getElementById('root')!).render(
   <StrictMode>
@@ -15,11 +16,13 @@ createRoot(document.getElementById('root')!).render(
           rtl={false}
           pauseOnFocusLoss
           draggable
-          theme="dark"
+          theme="dark" 
           limit={1}
           />
     <BrowserRouter>
+    <MainContextProvider>  
       <App />
+    </MainContextProvider>
     </BrowserRouter>
   </StrictMode>,
 )

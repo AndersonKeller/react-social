@@ -1,13 +1,14 @@
-import { useEffect } from "react"
+import { use, useContext, useEffect } from "react"
 import { Header } from "../../components/header/Header"
 import { useNavigate } from "react-router-dom"
 import { apiController } from "../../controller/api.controller"
 import { Feed } from "../../components/feed/Feed"
 import style from "../style.module.css"
 import { Iconify } from "../../components/iconify/Iconify"
+import { MainContext } from "../../context/MainContext"
 export const Home=()=>{
     const navigate = useNavigate()
-
+    const {  user, posts}= useContext(MainContext)
     const validateUser=async(token:string)=>{
         try {
             const res = await apiController.get("usuarios/retrieve",{
@@ -25,23 +26,35 @@ export const Home=()=>{
              navigate("/login")
         }
     }
+    const update=(e:React.ChangeEvent<HTMLInputElement>)=>{
+        console.log("update",e.target.files)
+        const reader = new FileReader()
+        const file = e.target.files![0]
+        reader.readAsText(file)
+        reader.onload=(even)=>{
+            console.log("reader",even.target!.result)
+        }
+        
+    }
     useEffect(()=>{
         console.log("use effect")
         const token = localStorage.getItem("token")
         if(!token){
-            navigate("/login")
+            //navigate("/login")
         }else{
-            validateUser(token)
+            //validateUser(token)
         }
+        console.log(posts,"posts do contexto")
     },[])
     
     return <>
     <Header/>
     
     <main className={style.main}>
-        <Iconify icon="mi:email" color="red" />
+    
         <section className={style.profile}>
             <p>Meu perfil</p>
+            
         </section>
         <Feed/>
     </main>

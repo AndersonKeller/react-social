@@ -13,13 +13,13 @@ export const Feed=({idUsuario}:FeedProps)=>{
     const [posts,setPosts] = useState([] as iPosts)
     const [loading,setLoading] = useState(true)
     const goToPerfil = (post:Post) => {
-        console.log(post,"post")
+        
         navigate(`/usuario/${post.usuario.id}`)
     }
     const getPosts = async()=>{
         setLoading(true)
         const res = await apiController.get("/posts")
-        console.log(res.data,"res")
+        
         const posts:iPosts = res.data
         if(posts){
             setTimeout(() => {
